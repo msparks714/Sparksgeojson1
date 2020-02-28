@@ -2,10 +2,10 @@ mapboxgl.accessToken = 'pk.eyJ1IjoibXNwYXJrczcxNCIsImEiOiJjazZsZjl0aXAwYmMzM21uM
 
 // we want to return to this point and zoom level after the user interacts
 // with the map, so store them in variables
-var initialCenterPoint = [-73.9895411, 40.744695]
+var initialCenterPoint = [-73.879478, 40.867870]
 var initialZoom = 10.67
 
-ar defaultText = '<p>Move the mouse over the map to get more info on a property</p>'
+var defaultText = '<p>Move the mouse over the map to get more info on a property</p>'
 $('#feature-info').html(defaultText)
 
 // create an object to hold the initialization options for a mapboxGL map
@@ -28,7 +28,7 @@ map.on('style.load', function() {
 //add a layer for your custom source//
 map.addSource('Bronxparks', {
   type:'geojson',
-  data:'./data/Bronxparks.geojson',
+  data:'data/Bronxparks.geojson',
 });
 
 
@@ -39,11 +39,13 @@ map.addSource('Bronxparks', {
   map.addLayer({
     id: 'fill-Bronxparks',
     type: 'fill',
-    source: 'Bronxparks',
+    source: 'Bronxparks.geojson',
     paint: {
       'fill-color': {
         type: 'categorical',
         property: 'LandUse',
+      }
+    }
   })
 
   // add an empty data source, which we will use to highlight the lot the user is hovering over
