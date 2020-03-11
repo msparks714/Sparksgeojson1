@@ -42,7 +42,7 @@ map.on('style.load', function() {
     type: 'fill',
     source: 'Bronxparks',
     paint: {
-      'fill-color':{
+      'fill-color': {
         type: 'categorical',
         property: 'LandUse',
         stops: [
@@ -84,35 +84,14 @@ map.on('style.load', function() {
     });
 
     // if the mouse pointer is over a feature on our layer of interest
-    // take the data for that feature and display it in a button
+    // take the data for that feature and display it in the sidebar
     if (features.length > 0) {
       map.getCanvas().style.cursor = 'pointer';  // make the cursor a pointer
 
-    var hoveredFeature = features[0]
-         var featureInfo = `
-     <p><strong>Park Name:</strong> ${hoveredFeature.properties.park_name}</p>
-     <p><strong>Type of Park:</strong> ${hoveredFeature.properties.landuse}</p>
-     <p><strong>Area in Sqft:</strong> ${hoveredFeature.properties.shape_area}</p>
-           `
-
-           $('#feature-info').html(featureInfo)
-
-      //create popup varible
-    var popup = new mapboxgl.Popup();
-
-  map.on('mouseenter', 'kitearea', function(e) {
-    popup
-      .setLngLat(e.lngLat)
-      .setHTML('Kiting Area')
-      .addTo(map)
-        })
-        map.on('mouseleave', 'kitearea', function() {
-          popup.remove();
-        })
       var hoveredFeature = features[0]
       var featureInfo = `
         <h4>${hoveredFeature.properties.Address}</h4>
-        <p><strong> Land Use :</strong> ${LandUse(parseInt(hoveredFeature.properties.LandUse)).description}</p>
+        <p><strong> Land Use :</strong> ${LandUseLookup(parseInt(hoveredFeature.properties.LandUse)).description}</p>
         <p><strong> Area :</strong> ${hoveredFeature.properties.shape_area}</p>
       `
       $('#feature-info').html(featureInfo)
