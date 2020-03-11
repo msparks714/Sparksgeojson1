@@ -24,26 +24,32 @@ map.addControl(new mapboxgl.NavigationControl());
 
 // wait for the initial style to Load
 map.on('style.load', function() {
-
-//add a layer for your custom source//
-map.addSource('Bronxparks', {
-  type:'geojson',
-  data:'data/Bronxparks.geojson',
-});
+  //add a layer for your custom source//
+  map.addSource('Bronxparks', {
+    type:'geojson',
+    data:'data/Bronxparks.geojson',
+  });
 
 
   // let's make sure the source got added by logging the current map state to the console
   console.log(map.getStyle().sources)
 
   // add a layer for our custom source
+  // Have to include the `stops` key and you can't use the value `null` as one of the stops. Need to use all one type of
+  // value, in this case strings.
   map.addLayer({
     id: 'fill-Bronxparks',
     type: 'fill',
-    source: 'Bronxparks.geojson',
+    source: 'Bronxparks',
     paint: {
       'fill-color': {
         type: 'categorical',
         property: 'LandUse',
+        stops: [
+          ["Playground", "#f00"],
+          ["Jointly Operated Playground", "#0f0"],
+          ["Neighborhood Park", "#00f"]
+        ]
       }
     }
   })
