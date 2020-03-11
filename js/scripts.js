@@ -90,9 +90,9 @@ map.on('style.load', function() {
 
       var hoveredFeature = features[0]
       var featureInfo = `
-        <h4>${hoveredFeature.properties.Address}</h4>
-        <p><strong> Land Use :</strong> ${LandUseLookup(parseInt(hoveredFeature.properties.LandUse)).description}</p>
-        <p><strong> Area :</strong> ${hoveredFeature.properties.shape_area}</p>
+        <p><strong> Park Name :</strong> ${hoveredFeature.properties.park_name}</p>
+        <p><strong> Total Area in Sqft:</strong> ${hoveredFeature.properties.shape_area}</p>
+        <p><strong> Type of Area:</strong> ${hoveredFeature.properties.landuse}</p>
       `
       $('#feature-info').html(featureInfo)
 
